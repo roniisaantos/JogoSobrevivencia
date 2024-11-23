@@ -42,6 +42,7 @@ public class Programa {
         Thread.sleep(3000);
 
         Ferramentas.linhaEmBranco();
+        Ferramentas.linhaEmBranco();
 
         jogador.atacar(vilao1);
 
