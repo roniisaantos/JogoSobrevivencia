@@ -6,7 +6,6 @@ import java.util.Random;
 public class Vilao {
 
     private String nome;
-    private Integer level;
     private Integer vida;
     private Integer poder;
     private static ArrayList<Vilao> listaDeViloes = new ArrayList<>();
@@ -32,19 +31,10 @@ public class Vilao {
         nome = nomesViloes[escolhaNome] + sortear.nextInt(100);
         vida = sortear.nextInt(20, 151); // vida inicial aleatória entre 20 e 150
         poder = sortear.nextInt(5, 31); // poder inicial aleatório entre 5 e 30
-        level = 1;
     }
 
     public static ArrayList<Vilao> getListaDeViloes() {
         return listaDeViloes;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
     }
 
     public Integer getVida() {
@@ -76,6 +66,6 @@ public class Vilao {
     @Override
     public String toString() {
         return String.format("""
-                Nome: %s | Level: %d | Vida: %d | Poder: %d""", nome, level, vida, poder);
+                Nome: %s | Vida: %d | Poder: %d""", nome, vida, poder);
     }
 }

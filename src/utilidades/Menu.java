@@ -17,6 +17,7 @@ public class Menu {
                 [2] Ver vilões do mundo
                 [3] Consultar inventário
                 [4] Ver status do personagem
+                [5] Encerrar o jogo
                 ==> Escolha uma ação desejada:""" + " ");
 
             int opcao = Programa.entrada.nextInt();
@@ -41,6 +42,10 @@ public class Menu {
                     System.out.println(Player.exibirDados());
                     Ferramentas.linhaPontilhada();
                     Ferramentas.linhaEmBranco();
+                    continue;
+
+                case 5:
+                    System.exit(0);
             }
         }
     }

@@ -31,7 +31,7 @@ public class Player {
     }
 
     public void setVida(Integer vida) {
-        Player.vida = vida;
+        this.vida = vida;
     }
 
     public Integer getPoder() {
@@ -44,33 +44,46 @@ public class Player {
 
     public static void lutar(Vilao vilao) throws InterruptedException {
 
+        System.out.printf("*** Atacando vilão %s...\n", vilao.getNome());
+        Thread.sleep(1000);
 
-            System.out.printf("*** Atacando vilão %s...\n", vilao.getNome());
-            Thread.sleep(1000);
+        while (vilao.getVida() > 0) {
 
-            while (vilao.getVida() > 0) {
+            vilao.setVida(vilao.getVida() - poder);
 
-                vilao.setVida(vilao.getVida() - poder);
-
-                if (vilao.getVida() < 0) {
-                    vilao.setVida(0);
-                }
-
-                if (vilao.getVida() == 0) {
-                    System.out.printf("%s foi derrotado!\n", vilao.getNome());
-                    Vilao.getListaDeViloes().remove(vilao);
-                    Ferramentas.linhaEmBranco();
-                    break;
-                }
-                else {
-                    System.out.printf("Você atacou com poder de %d, %s tem %d de vida.\n",
-                            poder, vilao.getNome(), vilao.getVida());
-                    Thread.sleep(800);
-                }
+            if (vilao.getVida() <= 0) {
+                System.out.printf("%s foi derrotado!\n", vilao.getNome());
+                Vilao.getListaDeViloes().remove(vilao);
+                Ferramentas.linhaEmBranco();
+                break;
             }
+            else {
+                System.out.printf("Você atacou com poder de %d, %s tem %d de vida.\n",
+                        poder, vilao.getNome(), vilao.getVida());
+                Thread.sleep(1500);
+            }
+
+            vida -= vilao.getPoder();
+
+            if (vida <= 0) {
+
+                vida = 0;
+                System.out.printf("%s te atacou com poder de %d, te resta %d de vida.\n",
+                        vilao.getNome(), vilao.getPoder(), vida);
+
+                System.out.printf("Você foi derrotado por %s :(\n", vilao.getNome());
+                System.exit(0);
+
+            }
+            else {
+                System.out.printf("%s te atacou com poder de %d, te resta %d de vida.\n",
+                        vilao.getNome(), vilao.getPoder(), vida);
+                Thread.sleep(1500);
+            }
+        }
     }
 
-    public void subirLevel(Player jogador) {
+    public void controleLevel(Player jogador) {
         long controle = 0;
 
     }
