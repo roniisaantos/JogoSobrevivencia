@@ -6,10 +6,9 @@ import java.util.Scanner;
 
 public class Programa {
 
+    public static final Scanner entrada = new Scanner(System.in);
+
     public static void main(String[] args) throws InterruptedException {
-
-
-        Scanner entrada = new Scanner(System.in);
 
         System.out.println("Vamos começar o jogo de sobrevivência em texto :)");
         Ferramentas.linhaEmBranco();
@@ -33,5 +32,7 @@ public class Programa {
         Ferramentas.linhaEmBranco();
 
         Menu.chamarMenu();
+
+        entrada.close();
     }
 }

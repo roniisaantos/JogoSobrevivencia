@@ -1,6 +1,5 @@
 package utilidades;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Mundo {
@@ -8,13 +7,11 @@ public class Mundo {
     private static String nome;
     private Integer qntdComidas;
     private Integer qntdViloes;
-    private static ArrayList<Vilao> listaDeViloes = new ArrayList<>();
+
 
     Random sortear = new Random();
 
-    public ArrayList<Vilao> getListaDeViloes() {
-        return listaDeViloes;
-    }
+
 
     public static String getNome() {
         return nome;
@@ -52,7 +49,7 @@ public class Mundo {
 
         if (qntdViloes > 0) {
             for (int i = 0; i < qntdViloes; i++) {
-                listaDeViloes.add(new Vilao());
+                Vilao.getListaDeViloes().add(new Vilao());
             }
         }
     }

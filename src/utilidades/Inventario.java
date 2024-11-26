@@ -1,6 +1,6 @@
 package utilidades;
 
-import java.util.Scanner;
+import aplicacao.Programa;
 
 public class Inventario {
 
@@ -20,7 +20,6 @@ public class Inventario {
                 System.out.printf("[%d] %s\n", i + 1, Comida.getListaDeComidas().get(i));
             }
 
-            Ferramentas.linhaPontilhada();
             menuInventario();
 
             Ferramentas.linhaPontilhada();
@@ -30,16 +29,17 @@ public class Inventario {
 
     public static void menuInventario() throws InterruptedException {
         System.out.print("""
+                =======================================
                 [111] Comer uma comida
                 [222] Voltar ao menu principal
+                =======================================
                 ====> Escolha uma ação desejada:""" + " ");
 
-        Scanner entrada = new Scanner(System.in);
-        int controle = entrada.nextInt();
+        int controle = Programa.entrada.nextInt();
 
         if (controle == 111) {
             System.out.print("Escolha o número da comida = ");
-            int escolhaComida = entrada.nextInt();
+            int escolhaComida = Programa.entrada.nextInt();
             Player.comer(Comida.getListaDeComidas().get(escolhaComida - 1));
 
             System.out.println("Comendo...");

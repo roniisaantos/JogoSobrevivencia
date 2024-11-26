@@ -1,5 +1,6 @@
 package utilidades;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Vilao {
@@ -7,7 +8,8 @@ public class Vilao {
     private String nome;
     private Integer level;
     private Integer vida;
-    private Integer poderAtaque;
+    private Integer poder;
+    private static ArrayList<Vilao> listaDeViloes = new ArrayList<>();
 
     Random sortear = new Random();
 
@@ -25,12 +27,16 @@ public class Vilao {
     };
 
     public Vilao(){
-        // Sorteia um dos 64 nomes do array
+        // Sorteia um dos 64 nomes do array e acrescenta um número aleatório entre 0 e 99
         int escolhaNome = sortear.nextInt(64);
-        this.nome = nomesViloes[escolhaNome];
-        this.vida = sortear.nextInt(20, 151); // vida inicial aleatória entre 20 e 150
-        this.poderAtaque = sortear.nextInt(1, 11); // poder inicial aleatório entre 1 e 10
-        this.level = 1;
+        nome = nomesViloes[escolhaNome] + sortear.nextInt(100);
+        vida = sortear.nextInt(20, 151); // vida inicial aleatória entre 20 e 150
+        poder = sortear.nextInt(5, 31); // poder inicial aleatório entre 5 e 30
+        level = 1;
+    }
+
+    public static ArrayList<Vilao> getListaDeViloes() {
+        return listaDeViloes;
     }
 
     public Integer getLevel() {
@@ -45,9 +51,7 @@ public class Vilao {
         return vida;
     }
 
-    public void setVida(Integer vida) {
-        this.vida = vida;
-    }
+    public void setVida(Integer vida) { this.vida = vida; }
 
     public String getNome() {
         return nome;
@@ -58,30 +62,20 @@ public class Vilao {
     }
 
     public void atacar(Player personagem) {
-        personagem.setVida(personagem.getVida() - poderAtaque);
+        personagem.setVida(Player.getVida() - poder);
     }
 
-    public Integer getPoderAtaque() {
-        return poderAtaque;
+    public Integer getPoder() {
+        return poder;
     }
 
-    public void setPoderAtaque(Integer poderAtaque) {
-        this.poderAtaque = poderAtaque;
-    }
-
-    public String exibirDados() {
-        return "Vilão: " + nome + "\n" +
-                "Level: " + level + "\n" +
-                "Vida: " + vida + "\n" +
-                "Poder de ataque: " + poderAtaque + "\n";
+    public void setPoder(Integer poder) {
+        this.poder = poder;
     }
 
     @Override
     public String toString() {
         return String.format("""
-                Nome: %s
-                Level: %d
-                Vida: %d
-                Poder de ataque: %d""", nome, level, vida, poderAtaque);
+                Nome: %s | Level: %d | Vida: %d | Poder: %d""", nome, level, vida, poder);
     }
 }

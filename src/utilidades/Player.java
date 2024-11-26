@@ -5,13 +5,13 @@ public class Player {
     private static String nome;
     private static Integer level;
     private static Integer vida;
-    private static Integer poderAtaque;
+    private static Integer poder;
 
     public Player(String nome) {
         Player.nome = nome;
         level = 1;
         vida = 100;
-        poderAtaque = 30;
+        poder = 30;
     }
 
     public String getNome() {
@@ -34,16 +34,40 @@ public class Player {
         Player.vida = vida;
     }
 
-    public Integer getPoderAtaque() {
-        return poderAtaque;
+    public Integer getPoder() {
+        return poder;
     }
 
     public void setPoderAtaque(Integer poderAtaque) {
-        Player.poderAtaque = poderAtaque;
+        Player.poder = poderAtaque;
     }
 
-    public void atacar(Vilao vilao) {
-        vilao.setVida(vilao.getVida() - poderAtaque);
+    public static void lutar(Vilao vilao) throws InterruptedException {
+
+
+            System.out.printf("*** Atacando vilão %s...\n", vilao.getNome());
+            Thread.sleep(1000);
+
+            while (vilao.getVida() > 0) {
+
+                vilao.setVida(vilao.getVida() - poder);
+
+                if (vilao.getVida() < 0) {
+                    vilao.setVida(0);
+                }
+
+                if (vilao.getVida() == 0) {
+                    System.out.printf("%s foi derrotado!\n", vilao.getNome());
+                    Vilao.getListaDeViloes().remove(vilao);
+                    Ferramentas.linhaEmBranco();
+                    break;
+                }
+                else {
+                    System.out.printf("Você atacou com poder de %d, %s tem %d de vida.\n",
+                            poder, vilao.getNome(), vilao.getVida());
+                    Thread.sleep(800);
+                }
+            }
     }
 
     public void subirLevel(Player jogador) {
@@ -60,6 +84,6 @@ public class Player {
         return "Nome do jogador: " + nome + "\n" +
                 "Level: " + level + "\n" +
                 "Vida: " + vida + "\n" +
-                "Poder de ataque: " + poderAtaque + "\n";
+                "Poder de ataque: " + poder + "\n";
     }
 }

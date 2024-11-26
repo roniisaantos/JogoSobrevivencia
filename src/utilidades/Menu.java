@@ -1,18 +1,25 @@
 package utilidades;
 
-import java.util.Scanner;
+import aplicacao.Programa;
 
 public class Menu {
 
     public static void chamarMenu() throws InterruptedException {
 
-        Scanner entrada = new Scanner(System.in);
-        int controle = 0;
-        while (controle == 0) {
+        //boolean controle = true;
 
-            System.out.println("============ MENU PRINCIPAL ============");
-            Ferramentas.menuPrincipal();
-            int opcao = entrada.nextInt();
+        while (true) {
+
+            System.out.print("""
+                ============ MENU PRINCIPAL ============
+                
+                [1] Criar e explorar novo mundo
+                [2] Ver vilões do mundo
+                [3] Consultar inventário
+                [4] Ver status do personagem
+                ==> Escolha uma ação desejada:""" + " ");
+
+            int opcao = Programa.entrada.nextInt();
             Ferramentas.linhaEmBranco();
 
             switch (opcao) {
@@ -22,21 +29,19 @@ public class Menu {
                     continue;
 
                 case 2:
-                    Inventario.consultarInventario();
+                    ModoLuta.consultarViloes();
                     continue;
 
                 case 3:
+                    Inventario.consultarInventario();
+                    continue;
+
+                case 4:
                     Ferramentas.linhaPontilhada();
                     System.out.println(Player.exibirDados());
                     Ferramentas.linhaPontilhada();
                     Ferramentas.linhaEmBranco();
-                    continue;
-
-                case 4:
-                    controle = 1;
-                    break;
             }
         }
-        entrada.close();
     }
 }
