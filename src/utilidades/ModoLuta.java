@@ -11,7 +11,6 @@ public class ModoLuta {
 
         if (Vilao.getListaDeViloes().isEmpty()) {
             System.out.println(" # Mundo sem vilões");
-            Ferramentas.linhaPontilhada();
             Menu.chamarMenu();
         }
         else {

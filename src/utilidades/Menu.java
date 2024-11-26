@@ -6,8 +6,6 @@ public class Menu {
 
     public static void chamarMenu() throws InterruptedException {
 
-        //boolean controle = true;
-
         while (true) {
 
             System.out.print("""

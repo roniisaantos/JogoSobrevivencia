@@ -21,20 +21,8 @@ public class Comida {
         return listaDeComidas;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public Integer getpontosDeVida() {
         return pontosDeVida;
-    }
-
-    public void setpontosDeVida(Integer vida) {
-        this.pontosDeVida = vida;
     }
 
     public Comida() {

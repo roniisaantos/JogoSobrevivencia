@@ -45,7 +45,7 @@ public class Inventario {
             System.out.println("Comendo...");
             Thread.sleep(1000);
 
-            System.out.printf("Vida atualizada para: %d\n", Player.getVida());
+            System.out.printf("Vida atualizada para: %d\n", Player.getVidaInicial());
 
             consultarInventario();
         }
