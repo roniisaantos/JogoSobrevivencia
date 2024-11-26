@@ -2,14 +2,14 @@ package utilidades;
 
 import java.util.Random;
 
-public class Viloes {
+public class Vilao {
 
     private String nome;
     private Integer level;
     private Integer vida;
     private Integer poderAtaque;
 
-    Random random = new Random();
+    Random sortear = new Random();
 
     String[] nomesViloes = {
             "Draekon", "Lord Umbra", "Morgath", "Zarok", "Venomshade", "Blightfang", "Ravenous", "Crimson Vex",
@@ -24,12 +24,12 @@ public class Viloes {
             "Fallen Monarch", "Wormwood", "Vampirion", "Ironclaw", "Shiverstrike", "Phantasm", "Veldrax", "Zephyrus"
     };
 
-    public Viloes(){
+    public Vilao(){
         // Sorteia um dos 64 nomes do array
-        int escolhaNome = random.nextInt(64);
+        int escolhaNome = sortear.nextInt(64);
         this.nome = nomesViloes[escolhaNome];
-        this.vida = random.nextInt(151) + 20; // vida inicial aleatória entre 20 e 150
-        this.poderAtaque = random.nextInt(10) + 1; // poder inicial aleatório entre 1 e 10
+        this.vida = sortear.nextInt(20, 151); // vida inicial aleatória entre 20 e 150
+        this.poderAtaque = sortear.nextInt(1, 11); // poder inicial aleatório entre 1 e 10
         this.level = 1;
     }
 
@@ -58,7 +58,7 @@ public class Viloes {
     }
 
     public void atacar(Player personagem) {
-        personagem.setVida(personagem.getVida() - this.poderAtaque);
+        personagem.setVida(personagem.getVida() - poderAtaque);
     }
 
     public Integer getPoderAtaque() {
@@ -74,5 +74,14 @@ public class Viloes {
                 "Level: " + level + "\n" +
                 "Vida: " + vida + "\n" +
                 "Poder de ataque: " + poderAtaque + "\n";
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                Nome: %s
+                Level: %d
+                Vida: %d
+                Poder de ataque: %d""", nome, level, vida, poderAtaque);
     }
 }

@@ -2,18 +2,16 @@ package utilidades;
 
 public class Player {
 
-    private String nome;
-    private Integer level;
-    private Integer vida;
-    private Integer energia;
-    private Integer poderAtaque;
+    private static String nome;
+    private static Integer level;
+    private static Integer vida;
+    private static Integer poderAtaque;
 
     public Player(String nome) {
-        this.nome = nome;
-        this.level = 1;
-        this.vida = 100;
-        this.poderAtaque = 30;
-        this.energia = 100;
+        Player.nome = nome;
+        level = 1;
+        vida = 100;
+        poderAtaque = 30;
     }
 
     public String getNome() {
@@ -25,23 +23,15 @@ public class Player {
     }
 
     public void setLevel(Integer level) {
-        this.level = level;
+        Player.level = level;
     }
 
-    public Integer getVida() {
+    public static Integer getVida() {
         return vida;
     }
 
     public void setVida(Integer vida) {
-        this.vida = vida;
-    }
-
-    public Integer getEnergia() {
-        return energia;
-    }
-
-    public void setEnergia(Integer energia) {
-        this.energia = energia;
+        Player.vida = vida;
     }
 
     public Integer getPoderAtaque() {
@@ -49,26 +39,27 @@ public class Player {
     }
 
     public void setPoderAtaque(Integer poderAtaque) {
-        this.poderAtaque = poderAtaque;
+        Player.poderAtaque = poderAtaque;
     }
 
-    public void atacar(Viloes vilao) {
-        vilao.setVida(vilao.getVida() - this.poderAtaque);
+    public void atacar(Vilao vilao) {
+        vilao.setVida(vilao.getVida() - poderAtaque);
     }
 
-    //public andar() {
+    public void subirLevel(Player jogador) {
+        long controle = 0;
 
-    //}
-
-    public void comer(Comidas comida) {
-        vida += comida.getVida();
     }
 
-    public String exibirDados() {
+    public static void comer(Comida comida) {
+        vida += comida.getpontosDeVida();
+        Comida.getListaDeComidas().remove(comida);
+    }
+
+    public static String exibirDados() {
         return "Nome do jogador: " + nome + "\n" +
                 "Level: " + level + "\n" +
                 "Vida: " + vida + "\n" +
-                "Poder de ataque: " + poderAtaque + "\n" +
-                "Energia: " + energia;
+                "Poder de ataque: " + poderAtaque + "\n";
     }
 }
