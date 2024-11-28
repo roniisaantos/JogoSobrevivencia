@@ -17,7 +17,7 @@ public class Inventario {
         else {
             Thread.sleep(1000);
             for (int i = 0; i < Comida.getListaDeComidas().size(); i++) {
-                System.out.printf("[%d] %s\n", i + 1, Comida.getListaDeComidas().get(i));
+                System.out.printf("[%d] %s\n", i, Comida.getListaDeComidas().get(i));
             }
 
             menuInventario();
@@ -40,12 +40,12 @@ public class Inventario {
         if (controle == 111) {
             System.out.print("Escolha o número da comida = ");
             int escolhaComida = Programa.entrada.nextInt();
-            Player.comer(Comida.getListaDeComidas().get(escolhaComida - 1));
+            Player.comer(Comida.getListaDeComidas().get(escolhaComida));
 
             System.out.println("Comendo...");
             Thread.sleep(1000);
 
-            System.out.printf("Vida atualizada para: %d\n", Player.getVidaInicial());
+            System.out.printf("Vida atualizada para: %d\n", Player.getVida());
 
             consultarInventario();
         }

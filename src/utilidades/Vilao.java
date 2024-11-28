@@ -6,8 +6,8 @@ import java.util.Random;
 public class Vilao {
 
     private String nome;
-    private Integer vidaInicial;
-    private Integer poderInicial;
+    private Integer vida;
+    private Integer poder;
     private static ArrayList<Vilao> listaDeViloes = new ArrayList<>();
 
     Random sortear = new Random();
@@ -29,31 +29,33 @@ public class Vilao {
         // Sorteia um dos 64 nomes do array e acrescenta um número aleatório entre 0 e 99
         int escolhaNome = sortear.nextInt(64);
         nome = nomesViloes[escolhaNome] + sortear.nextInt(100);
-        vidaInicial = sortear.nextInt(50, 201); // vidaInicial inicial aleatória entre 50 e 200
-        poderInicial = sortear.nextInt(5, 16); // poderInicial inicial aleatório entre 5 e 15
+        vida = sortear.nextInt(50, 201); // vida inicial aleatória entre 50 e 200
+        poder = sortear.nextInt(5, 16); // poder inicial aleatório entre 5 e 15
     }
 
     public static ArrayList<Vilao> getListaDeViloes() {
         return listaDeViloes;
     }
 
-    public Integer getVidaInicial() {
-        return vidaInicial;
+    public Integer getVida() {
+        return vida;
     }
-
-    public void setVidaInicial(Integer vidaInicial) { this.vidaInicial = vidaInicial; }
 
     public String getNome() {
         return nome;
     }
 
-    public Integer getPoderInicial() {
-        return poderInicial;
+    public Integer getPoder() {
+        return poder;
+    }
+
+    public void setPoder(Integer poder) {
+        this.poder = poder;
     }
 
     @Override
     public String toString() {
         return String.format("""
-                Nome: %s | Vida: %d | Poder: %d""", nome, vidaInicial, poderInicial);
+                Nome: %s | Vida: %d | Poder: %d""", nome, vida, poder);
     }
 }

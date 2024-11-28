@@ -27,7 +27,7 @@ public class Comida {
 
     public Comida() {
         this.nome = frutas[sortear.nextInt(15)];
-        this.pontosDeVida = sortear.nextInt(10, 40);
+        this.pontosDeVida = 50;//sortear.nextInt(10, 40);
     }
 
     @Override
