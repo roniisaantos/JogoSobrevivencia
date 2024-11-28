@@ -22,8 +22,8 @@ public class Mundo {
 
     public Mundo() {
         nome = planetas[sortear.nextInt(8)] + sortear.nextInt(999);
-        qntdComidas = 4; //sortear.nextInt(4);
-        qntdViloes = 4;//sortear.nextInt(3);
+        qntdComidas = sortear.nextInt(4);
+        qntdViloes = sortear.nextInt(3);
         definirComidas_Viloes(qntdComidas, qntdViloes);
     }
 
