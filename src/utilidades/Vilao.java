@@ -30,7 +30,8 @@ public class Vilao {
         int escolhaNome = sortear.nextInt(64);
         nome = nomesViloes[escolhaNome] + sortear.nextInt(100);
         vida = sortear.nextInt(50, 201); // vida inicial aleatória entre 50 e 200
-        poder = sortear.nextInt(5, 16); // poder inicial aleatório entre 5 e 15
+        poder = sortear.nextInt(10, 26); // poder inicial aleatório entre 10 e 25
+        controleLevel();
     }
 
     public static ArrayList<Vilao> getListaDeViloes() {
@@ -51,6 +52,15 @@ public class Vilao {
 
     public void setPoder(Integer poder) {
         this.poder = poder;
+    }
+
+    public void controleLevel() {
+        if (Player.getLevel() > 1) {
+            for (int i = 1; i < Player.getLevel(); i++) {
+                poder += poder / 5; // Aumenta o poder do novo vilão em 20% a cada level do player.
+                vida += vida / 10; // Aumenta a vida do novo vilão em 10 a cada level do player.
+            }
+        }
     }
 
     @Override

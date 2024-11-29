@@ -1,5 +1,7 @@
 package utilidades;
 
+import java.util.Random;
+
 public class Player {
 
     private static String nome;
@@ -8,18 +10,25 @@ public class Player {
     private static Integer level = 1;
     private static Integer controleLevel = 0;
 
+    Random sortear = new Random();
+
     public Player(String nome) {
         Player.nome = nome;
-        vida = 150;
-        poder = 25;
+        vida = sortear.nextInt(100, 151);
+        poder = sortear.nextInt(25, 46);
     }
+
+    public static Integer getVida() {
+        return vida;
+    }
+
 
     public String getNome() {
         return nome;
     }
 
-    public static Integer getVida() {
-        return vida;
+    public static Integer getLevel() {
+        return level;
     }
 
     public static void lutar(Vilao vilao) throws InterruptedException {
@@ -46,16 +55,17 @@ public class Player {
             if (vidaParcial_V <= 0) {
 
                 vidaParcial_V = 0;
-                System.out.printf("Você atacou com poder de %d, %s tem %d de vida.\n",
+                System.out.printf("=> Você atacou com poder de %d, %s tem %d de vida.\n",
                         poderParcial_P, vilao.getNome(), vidaParcial_V);
 
                 System.out.printf("%s foi derrotado!\n", vilao.getNome());
                 Vilao.getListaDeViloes().remove(vilao);
+                vida = vidaParcial_P;
                 Ferramentas.linhaEmBranco();
                 break;
             }
             else {
-                System.out.printf("Você atacou com poder de %d, %s tem %d de vida.\n",
+                System.out.printf("=> Você atacou com poder de %d, %s tem %d de vida.\n",
                         poderParcial_P, vilao.getNome(), vidaParcial_V);
                 Thread.sleep(1500);
             }
@@ -74,7 +84,7 @@ public class Player {
                 System.out.printf("%s te atacou com poder de %d, te resta %d de vida.\n",
                         vilao.getNome(), poderParcial_V, vidaParcial_P);
 
-                System.out.printf("Você foi derrotado por %s :(\n", vilao.getNome());
+                System.out.printf("=> Você foi derrotado por %s :(\n", vilao.getNome());
                 System.exit(0);
 
             }
@@ -93,18 +103,20 @@ public class Player {
         if (controleLevel >= 100) { // Verifica se o player consumiu 100 pontos de vida em comida.
 
             level++;
-            controleLevel = 0;
+            controleLevel -= 100;
             poder += (poder/10);
 
             for(Vilao vilao : Vilao.getListaDeViloes()) {
                 vilao.setPoder(vilao.getPoder() + (vilao.getPoder() / 5)); // Aumentou 20% de poder em todos os vilões do mundo.
             }
 
-            System.out.printf("Parabéns! Você subiu para o nível %d\n", level);
+            Ferramentas.linhaEmBranco();
+            System.out.printf("Nível de força %d atigindo!\n", level);
             Thread.sleep(500);
             System.out.println("Aumento de poder em 10%! Poder atual: " + poder);
             Thread.sleep(500);
             System.out.println("* Vilões do mundo atual ganham 20% de poder!");
+            System.out.println("* Vilões do próximo mundo terão 20% a mais de poder e 10% de vida!");
             Ferramentas.linhaEmBranco();
         }
     }
@@ -117,7 +129,7 @@ public class Player {
 
     public static String exibirDados() {
         return "Nome do jogador: " + nome + "\n" +
-                "Level: " + level + "\n" +
+                "Nível de força: " + level + "\n" +
                 "Vida: " + vida + "\n" +
                 "Poder de ataque: " + poder + "\n";
     }

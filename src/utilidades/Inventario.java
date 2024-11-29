@@ -2,6 +2,8 @@ package utilidades;
 
 import aplicacao.Programa;
 
+import java.util.InputMismatchException;
+
 public class Inventario {
 
     public static void consultarInventario() throws InterruptedException {
@@ -13,11 +15,10 @@ public class Inventario {
             System.out.println(" # Vazio");
             Ferramentas.linhaPontilhada();
             Menu.chamarMenu();
-        }
-        else {
+        } else {
             Thread.sleep(1000);
             for (int i = 0; i < Comida.getListaDeComidas().size(); i++) {
-                System.out.printf("[%d] %s\n", i, Comida.getListaDeComidas().get(i));
+                System.out.printf("[%d] %s\n", i + 1, Comida.getListaDeComidas().get(i));
             }
 
             menuInventario();
@@ -28,35 +29,49 @@ public class Inventario {
     }
 
     public static void menuInventario() throws InterruptedException {
-        System.out.print("""
-                =======================================
-                [111] Comer uma comida
-                [222] Voltar ao menu principal
-                =======================================
-                ====> Escolha uma ação desejada:""" + " ");
 
-        int controle = Programa.entrada.nextInt();
 
-        if (controle == 111) {
-            System.out.print("Escolha o número da comida = ");
-            int escolhaComida = Programa.entrada.nextInt();
-            Player.comer(Comida.getListaDeComidas().get(escolhaComida));
+        while (true) {
 
-            System.out.println("Comendo...");
-            Thread.sleep(1000);
+            System.out.print("""
+                    =======================================
+                    [111] Comer uma comida
+                    [222] Voltar ao menu principal
+                    =======================================
+                    ====> Escolha uma ação desejada:""" + " ");
 
-            System.out.printf("Vida atualizada para: %d\n", Player.getVida());
+            try {
 
-            consultarInventario();
-        }
-        else if (controle == 222) {
-            Ferramentas.linhaEmBranco();
-            Menu.chamarMenu();
-        }
-        else {
-            System.out.println("ERRO! Digite uma opção válida!");
-            Ferramentas.linhaEmBranco();
-            menuInventario();
+                int controle = Programa.entrada.nextInt();
+
+                switch (controle) {
+
+                    case 111:
+                        System.out.print("Escolha o número da comida = ");
+                        int escolhaComida = Programa.entrada.nextInt();
+                        Player.comer(Comida.getListaDeComidas().get(escolhaComida - 1));
+
+                        System.out.println("Comendo...");
+                        Thread.sleep(1000);
+
+                        System.out.printf("Vida atualizada para: %d\n", Player.getVida());
+
+                        consultarInventario();
+
+                    case 222:
+                        Ferramentas.linhaEmBranco();
+                        Menu.chamarMenu();
+
+                    default:
+                        System.out.println("Opção inválida! Por favor, escolha 111 ou 222.");
+                        Ferramentas.linhaEmBranco();
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Use somente números para navegar pelo menu! ;)");
+                Programa.entrada.nextLine();
+                Ferramentas.linhaEmBranco();
+            }
         }
     }
 }

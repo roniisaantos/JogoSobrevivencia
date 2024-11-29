@@ -2,6 +2,8 @@ package utilidades;
 
 import aplicacao.Programa;
 
+import java.util.InputMismatchException;
+
 public class ModoLuta {
 
     public static void consultarViloes() throws InterruptedException {
@@ -27,33 +29,43 @@ public class ModoLuta {
     }
 
     public static void menuLuta() throws InterruptedException {
-        System.out.print("""
+
+        while (true) {
+
+            System.out.print("""
                 =======================================
                 [111] Lutar contra vilões
                 [222] Voltar ao menu principal
                 =======================================
                 ====> Escolha uma ação desejada:""" + " ");
 
-        int controle = Programa.entrada.nextInt();
+            try {
 
-        if (controle == 111) {
+                int controle = Programa.entrada.nextInt();
+                switch (controle) {
+                    case 111:
+                        System.out.print("Escolha o número do vilão = ");
+                        int escolhaVilao = Programa.entrada.nextInt();
 
-            System.out.print("Escolha o número do vilão = ");
-            int escolhaVilao = Programa.entrada.nextInt();
+                        Player.lutar(Vilao.getListaDeViloes().get(escolhaVilao - 1));
+                        Ferramentas.linhaEmBranco();
 
-            Player.lutar(Vilao.getListaDeViloes().get(escolhaVilao - 1));
-            Ferramentas.linhaEmBranco();
+                        consultarViloes();
 
-            consultarViloes();
-        }
-        else if (controle == 222) {
-            Ferramentas.linhaEmBranco();
-            Menu.chamarMenu();
-        }
-        else {
-            System.out.println("ERRO! Digite uma opção válida!");
-            Ferramentas.linhaEmBranco();
-            menuLuta();
+                    case 222:
+                        Ferramentas.linhaEmBranco();
+                        Menu.chamarMenu();
+
+                    default:
+                        System.out.println("Opção inválida! Por favor, escolha 111 ou 222.");
+                        Ferramentas.linhaEmBranco();
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Use somente números para navegar pelo menu! ;)");
+                Programa.entrada.nextLine();
+                Ferramentas.linhaEmBranco();
+            }
         }
     }
 }
