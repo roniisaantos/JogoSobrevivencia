@@ -67,10 +67,9 @@ public class Inventario {
                         Ferramentas.linhaEmBranco();
                 }
 
-            } catch (InputMismatchException e) {
-                System.out.println("Use somente números para navegar pelo menu! ;)");
+            } catch (InputMismatchException | IndexOutOfBoundsException e) {
+                System.out.println("\nEscolha uma opção válida!\n");
                 Programa.entrada.nextLine();
-                Ferramentas.linhaEmBranco();
             }
         }
     }

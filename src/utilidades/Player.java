@@ -22,7 +22,6 @@ public class Player {
         return vida;
     }
 
-
     public String getNome() {
         return nome;
     }

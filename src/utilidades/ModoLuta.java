@@ -57,14 +57,12 @@ public class ModoLuta {
                         Menu.chamarMenu();
 
                     default:
-                        System.out.println("Opção inválida! Por favor, escolha 111 ou 222.");
-                        Ferramentas.linhaEmBranco();
+                        System.out.println("Opção inválida! Por favor, escolha 111 ou 222.\n");
                 }
             }
-            catch (InputMismatchException e) {
-                System.out.println("Use somente números para navegar pelo menu! ;)");
+            catch (InputMismatchException | IndexOutOfBoundsException e) {
+                System.out.println("\nEscolha uma opção válida!\n");
                 Programa.entrada.nextLine();
-                Ferramentas.linhaEmBranco();
             }
         }
     }
